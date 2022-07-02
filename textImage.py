@@ -49,7 +49,10 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print(device)
 model, preprocess = clip.load("ViT-B/32", device=device)
 
-text = clip.tokenize(["old man"]).to(device)
+# text = clip.tokenize(["old man"]).to(device) # great
+# text = clip.tokenize(["happy young man"]).to(device) # great
+# text = clip.tokenize(["young girl"]).to(device) # ok
+text = clip.tokenize(["angry man"]).to(device) # maybe
 
 c = 10
 mse = nn.MSELoss(reduction="sum")
@@ -139,7 +142,7 @@ for i in range(epochs):
     optimizer.step()
     if i % 100 == 0:
         save_to(clip_img, 'clipin_{}.png'.format(i))
-    scheduler.step()
+    scheduler.step() # Don't use if loss doesn't drop?
 
 save_to(clip_img, 'clipin_{}.png'.format(epochs))
 # Image.fromarray(gan_img[0].cpu().numpy(), 'RGB').save('ganclip_{}.png'.format(epochs))
