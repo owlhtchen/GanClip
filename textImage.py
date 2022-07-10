@@ -49,10 +49,10 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print(device)
 model, preprocess = clip.load("ViT-B/32", device=device)
 
-# text = clip.tokenize(["old man"]).to(device) # great
+text = clip.tokenize(["old man"]).to(device) # great
 # text = clip.tokenize(["happy young man"]).to(device) # great
 # text = clip.tokenize(["young girl"]).to(device) # ok
-text = clip.tokenize(["angry man"]).to(device) # maybe
+# text = clip.tokenize(["angry man"]).to(device) # maybe
 
 c = 10
 mse = nn.MSELoss(reduction="sum")
